@@ -17,17 +17,11 @@ export class TimerHeader extends React.Component {
         }, 1000);
     }
 
-    componentDidMount() {
-    }
-    componentWillReceiveProps(nextProps, nextContext) {
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('component update');
-    }
-
     handleCorrectOption() {
-        this.setState((state) =>({timer: TIME_PER_QUESTION, totalTime: state.totalTime + TIME_PER_QUESTION - this.state.timer}));
+        this.setState((state) => ({
+            timer: TIME_PER_QUESTION,
+            totalTime: state.totalTime + TIME_PER_QUESTION - this.state.timer
+        }));
     }
 
     componentWillUnmount() {
@@ -47,6 +41,7 @@ export class TimerHeader extends React.Component {
             }
         }, 1000);
     }
+
     render() {
         return !this.props.isGameOver && (<div>
             <SpeedyCalcHeader {...this.props} {...this.state} />

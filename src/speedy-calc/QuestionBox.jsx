@@ -1,4 +1,5 @@
 import React from "react";
+import {Button} from "antd";
 
 export class QuestionBox extends React.Component {
     constructor(props) {
@@ -29,8 +30,6 @@ export class QuestionBox extends React.Component {
 
     handleUserResponse(selectedOption) {
         // console.log(this.props);
-        console.log(this.operand1, this.operand2, this.operator);
-        console.log(selectedOption, this.correctAnswer);
         this.props.handleOptionSelect(selectedOption === this.correctAnswer);
     }
 
@@ -40,7 +39,7 @@ export class QuestionBox extends React.Component {
             <h4>{this.operand1} {this.operator} {this.operand2}</h4>
             <ul>
                 {this.options.map((el, idx) => <li key={idx}>
-                    <button onClick={this.handleUserResponse.bind(this, el)}>{el}</button>
+                    <Button onClick={this.handleUserResponse.bind(this, el)}>{el}</Button>
                 </li>)}
             </ul>
         </div>)

@@ -9,7 +9,7 @@ export class SpeedyRoot extends React.Component {
         super(props);
         this.timerElement = React.createRef();
         this.state = {isGameOver: false, currentScore: 0};
-        this.restartGame = this.restartGame.bind(this);
+
         this.updateGameOver = this.updateGameOver.bind(this);
         this.handleOptionSelect = this.handleOptionSelect.bind(this);
         this.prevState = {};
@@ -30,18 +30,14 @@ export class SpeedyRoot extends React.Component {
         }
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        this.prevState = prevState;
-        console.log(this.timerElement);
         this.totalTime = this.timerElement.state.totalTime || 0;
-        console.log('component did update in speedy root', this.prevState, this.state);
     }
 
     updateGameOver(gameStatus) {
-        console.log('update game over called', gameStatus);
         this.setState((state) => ({isGameOver: gameStatus}));
     }
 
-    restartGame() {
+    restartGame = () => {
         this.setState({
             isGameOver: false,
             currentScore: 0,
@@ -53,8 +49,9 @@ export class SpeedyRoot extends React.Component {
     render() {
         return (<div>
             <TimerHeader isGameOver={this.state.isGameOver} {...this.state} ref={(el) => this.timerElement = el} handleGameOver={this.updateGameOver}/>
+            { this.state.isGameOver && <GameOver {...this.state}  isGameOver={this.state.isGameOver} restartGame={this.restartGame} timeCounsumed={this.totalTime}/>
+            }
             <QuestionBox isGameOver={this.state.isGameOver} handleOptionSelect={this.handleOptionSelect}/>
-            <GameOver {...this.state}  isGameOver={this.state.isGameOver} restartGame={this.restartGame} timeCounsumed={this.totalTime}/>
-        </div>)
+              </div>)
     }
 }
