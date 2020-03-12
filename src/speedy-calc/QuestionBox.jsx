@@ -11,7 +11,6 @@ export class QuestionBox extends React.Component {
             '*': (a, b) => (a * b),
             '/': (a, b) => (a / b)
         };
-        this.generateQuestion();
     }
 
     generateQuestion() {

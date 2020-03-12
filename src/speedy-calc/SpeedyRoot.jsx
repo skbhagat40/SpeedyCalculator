@@ -12,7 +12,6 @@ export class SpeedyRoot extends React.Component {
 
         this.updateGameOver = this.updateGameOver.bind(this);
         this.handleOptionSelect = this.handleOptionSelect.bind(this);
-        this.prevState = {};
     }
 
     handleOptionSelect(isAnswerCorrect) {
@@ -21,8 +20,7 @@ export class SpeedyRoot extends React.Component {
             this.setState((state) => ({
                 currentScore: state.currentScore + 1,
                 totalTime: state.totalTime + (TIME_PER_QUESTION - state.timer)
-            }));
-            this.timerElement.handleCorrectOption();
+            }), this.timerElement.handleCorrectOption()); // pass as a callback as state updates are async.
         }
         else {
             this.setState((state) => ({isGameOver: true}));
@@ -44,7 +42,7 @@ export class SpeedyRoot extends React.Component {
         });
         this.timerElement.resetState();
         // this.forceUpdate();
-    }
+    };
 
     render() {
         return (<div>

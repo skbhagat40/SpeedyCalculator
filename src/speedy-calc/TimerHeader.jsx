@@ -8,6 +8,10 @@ export class TimerHeader extends React.Component {
         this.state = {totalTime: 0, timer: TIME_PER_QUESTION};
         this.handleCorrectOption = this.handleCorrectOption.bind(this);
         this.resetState = this.resetState.bind(this);
+        this.initializeTimer();
+    }
+
+    initializeTimer() {
         this.timer = setInterval(() => {
             this.setState((state) => ({timer: state.timer - 1}));
             if (this.state.timer === 0) {
@@ -33,13 +37,7 @@ export class TimerHeader extends React.Component {
             totalTime: 0,
             timer: TIME_PER_QUESTION,
         });
-        this.timer = setInterval(() => {
-            this.setState((state) => ({timer: state.timer - 1}));
-            if (this.state.timer === 0) {
-                this.props.handleGameOver(true);
-                clearInterval(this.timer);
-            }
-        }, 1000);
+        this.initializeTimer();
     }
 
     render() {
